@@ -1,11 +1,11 @@
 package com.lanister.encuesta.controller;
 
 import com.lanister.encuesta.dto.request.PollCreationRequest;
+import com.lanister.encuesta.dto.response.PollCreatedResponse;
+import com.lanister.encuesta.service.IPollService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -13,10 +13,13 @@ import javax.validation.Valid;
 @RequestMapping("/polls")
 public class PollController {
 
-    @PostMapping
-    public String createPoll(@RequestBody @Valid PollCreationRequest  pollCreationRequest, Authentication authentication){
+    @Autowired
+    IPollService pollService;
 
-        System.out.println(pollCreationRequest);
-        return authentication.getPrincipal().toString();
+    @PostMapping
+    public PollCreatedResponse createPoll(@RequestBody @Valid PollCreationRequest  pollCreationRequest, Authentication authentication){
+
+        String pollUuid = pollService.creatrePoll(pollCreationRequest,authentication.getPrincipal().toString() );
+        return  new PollCreatedResponse(pollUuid);
     }
 }

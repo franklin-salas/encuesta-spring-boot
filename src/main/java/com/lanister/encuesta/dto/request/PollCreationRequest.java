@@ -20,7 +20,7 @@ public class PollCreationRequest {
     private String content;
     @NotNull
 
-    private boolean isOpened;
+    private boolean opened;
     @Valid
     @NotEmpty
     @Size(min = 1, max = 30)
