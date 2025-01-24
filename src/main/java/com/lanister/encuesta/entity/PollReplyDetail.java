@@ -6,19 +6,19 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name = "answers")
+@Entity(name = "poll_reply_details")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Answer {
-
+public class PollReplyDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length = 255)
-    private String content;
-
+    @Column
+    private long questionId;
+    @Column
+    private long answerId;
     @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    @JoinColumn(name = "poll_reply_id")
+    private PollReply pollReply;
 }

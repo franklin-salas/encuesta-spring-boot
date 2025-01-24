@@ -6,7 +6,7 @@ package com.lanister.encuesta.service;
 
 import com.lanister.encuesta.dto.request.UserRegisterRequest;
 import com.lanister.encuesta.entity.User;
-import com.lanister.encuesta.repository.IUserRepository;
+import com.lanister.encuesta.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -24,9 +24,9 @@ import java.util.ArrayList;
 @AllArgsConstructor
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
     
-    private IUserRepository iUserRepository;
+    private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -34,19 +34,19 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         BeanUtils.copyProperties(userRegisterRequest, user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        iUserRepository.save(user);
+        userRepository.save(user);
         return user;
 
     }
 
     @Override
     public User getUser(String email) {
-        return iUserRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = iUserRepository.findByEmail(username);
+        User user = userRepository.findByEmail(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(username);

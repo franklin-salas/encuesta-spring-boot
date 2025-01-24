@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author frank
  */
 @Repository
-public interface IUserRepository extends CrudRepository<User,Long>{
+public interface UserRepository extends CrudRepository<User,Long>{
     public User findByEmail(String email);
 }

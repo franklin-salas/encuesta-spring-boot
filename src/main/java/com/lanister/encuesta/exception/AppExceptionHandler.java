@@ -39,4 +39,10 @@ public class AppExceptionHandler {
         
      return new ResponseEntity<>(validationErrors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(value = {Exception.class})
+    public ResponseEntity<Object> handleException (Exception ex, WebRequest webRequest) {
+        ErrorMessage errorMessage = new ErrorMessage(new Date(), ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

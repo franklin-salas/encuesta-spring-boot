@@ -1,6 +1,6 @@
 package com.lanister.encuesta.security;
 
-import com.lanister.encuesta.service.IUserService;
+import com.lanister.encuesta.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurity  extends WebSecurityConfigurerAdapter {
 
-    private  final IUserService iUserService;
+    private  final UserService userService;
     private  final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -39,7 +39,7 @@ public class WebSecurity  extends WebSecurityConfigurerAdapter {
 
     @Override
     public  void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(iUserService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     public AuthenticationFilter getAuthenticationFilter() throws Exception {

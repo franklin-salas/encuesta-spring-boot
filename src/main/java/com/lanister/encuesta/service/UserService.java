@@ -5,7 +5,7 @@ import com.lanister.encuesta.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-public interface IUserService extends UserDetailsService {
+public interface UserService extends UserDetailsService {
     public User crearUser(UserRegisterRequest userRegisterRequest);
     public User getUser(String email);
 }

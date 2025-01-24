@@ -2,7 +2,7 @@ package com.lanister.encuesta.validators;
 
 import com.lanister.encuesta.annotations.UniqueEmail;
 import com.lanister.encuesta.entity.User;
-import com.lanister.encuesta.repository.IUserRepository;
+import com.lanister.encuesta.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class UniqueEmailValidator  implements ConstraintValidator<UniqueEmail, String> {
     @Autowired
-    IUserRepository iUserRepository;
+    UserRepository iUserRepository;
 
 
     @Override

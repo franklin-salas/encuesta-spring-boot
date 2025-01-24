@@ -17,7 +17,7 @@ public class Poll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(nullable = false)
     private String pollId;
     @Column(nullable = false, length = 255)
@@ -29,5 +29,6 @@ public class Poll {
     private User user;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "poll")
     private List<Question> questions = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "poll")
+    private  List<PollReply>replies = new ArrayList<>();
 }
